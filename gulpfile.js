@@ -5,20 +5,20 @@ var gulp = require('gulp')
 , CacheBuster = require('gulp-cachebust')
 , print = require('gulp-print')
 , babel = require('gulp-babel')
-, uglify = require('gulp-uglify')
+// , uglify = require('gulp-uglify')
 , browserSync = require('browser-sync')
 , nodemon = require('gulp-nodemon');
 
 var cachebust = new CacheBuster();
 
 gulp.task('build-css', function(){
-  return gulp.src('./styles/*')
+  return gulp.src(['public/**/*.sass', '!public/dist/**/*'])
   .pipe(sourcemaps.init())
   .pipe(sass())
   .pipe(cachebust.resources())
   .pipe(concat('styles.css'))
   .pipe(sourcemaps.write('./maps'))
-  .pipe(gulp.dest('./dist'));
+  .pipe(gulp.dest('./public/dist'));
 });
 
 gulp.task('build-js', function() {
